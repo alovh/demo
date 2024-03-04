@@ -25,7 +25,7 @@ updates:
 
 registries:
   artifactory:
-    type: npm-registry
+    type: maven-repository
     url: ${{secrets.ARTIFACTORY_URL}}
     username: ${{secrets.ENTUR_ARTIFACTORY_USER}}
     password: ${{secrets.ENTUR_ARTIFACTORY_PASSWORD}}
