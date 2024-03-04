@@ -5,6 +5,9 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+      time: "09:00"
+      timezone: "Europe/Oslo"
+      day: "monday"
   - package-ecosystem: npm
     directory: "/javascript"
     schedule:
@@ -13,3 +16,10 @@ updates:
     directory: "/ruby"
     schedule:
       interval: "weekly"
+
+registries:
+  artifactory:
+    type: npm-registry
+    url: ${{secrets.ARTIFACTORY_URL}}
+    username: ${{secrets.ENTUR_ARTIFACTORY_USER}}
+    password: ${{secrets.ENTUR_ARTIFACTORY_PASSWORD}}
