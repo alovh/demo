@@ -1,0 +1,85 @@
+plugins {
+    id "org.springframework.boot" version "2.7.18"
+    id "io.spring.dependency-management"  version "1.1.4"
+    id 'org.jetbrains.kotlin.jvm' version '1.9.22'
+    id 'org.jetbrains.kotlin.plugin.spring' version '1.9.20'
+    id "org.owasp.dependencycheck" version "9.0.9"
+    id "jacoco"
+}
+
+apply plugin: 'kotlin'
+apply plugin: 'kotlin-spring'
+apply plugin: 'idea'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'org.owasp.dependencycheck'
+
+idea {
+    module {
+        outputDir file('build/classes/main')
+        testOutputDir file('build/classes/test')
+    }
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        url 'https://entur2.jfrog.io/entur2/libs-release'
+        credentials {
+            username = "${project.properties['entur_artifactory_user'] ?: System.env.ARTIFACTORY_USER}"
+            password = "${project.properties['entur_artifactory_password'] ?: System.env.ARTIFACTORY_PASSWORD}"
+        }
+    }
+}
+
+configurations {
+    compile.exclude module: "spring-boot-starter-tomcat"
+}
+
+jacoco {
+  toolVersion = "0.8.11"
+}
+
+dependencies {
+    implementation("org.springframework.boot:spring-boot-starter-actuator")
+    implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-jetty")
+    implementation("org.jetbrains.kotlin:kotlin-reflect")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+   // Jfrog internal packages just for testing of renovate worker 
+    val enturOauthVersion = "3.9.1"
+    implementation("org.entur.auth:oauth2-rs-spring-boot-3-web:$enturOauthVersion")
+    implementation("org.entur.auth:oidc-auth-client:$enturOauthVersion")
+    testImplementation("org.springframework.boot:spring-boot-starter-test") {
+        exclude(group: "org.junit.vintage", module: "junit-vintage-engine")
+    }
+}
+
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "17"
+  }
+
+test {
+    useJUnitPlatform()
+    environment("APP_ENV", "local")
+    finalizedBy(jacocoTestReport) // report is always generated after tests run
+  }
+
+compileKotlin {
+    kotlinOptions {
+        freeCompilerArgs = ["-Xjsr305=strict"]
+        jvmTarget = "17"
+    }
+}
+
+jacocoTestReport {
+    executionData.setFrom(fileTree(buildDir).include("/jacoco/*.exec"))
+    reports {
+      xml.required.set(true)
+      csv.required.set(false)
+      html.required.set(true)
+    }
+    dependsOn(test) // tests are required to run before generating the report
+  }
