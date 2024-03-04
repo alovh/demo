@@ -16,6 +16,12 @@ updates:
     directory: "/ruby"
     schedule:
       interval: "weekly"
+  - package-ecosystem: "gradle"
+    directory: "/java"
+    registries:
+      - artifactory
+    schedule:
+      interval: "daily"
 
 registries:
   artifactory:
