@@ -28,7 +28,8 @@ updates:
           - "patch"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 0
+    open-pull-requests-limit: 3
+    versioning-strategy: increase-if-necessary
     labels:
       - "npm"
       - "dependencies"
@@ -40,7 +41,8 @@ updates:
         update-types: [version-update:semver-patch]
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 0
+    open-pull-requests-limit: 3
+    vendor: true
   - package-ecosystem: docker
     directory: "java"
     milestone: 1
