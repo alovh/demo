@@ -1,31 +1,52 @@
 ---
 version: 2
+registries:
+  jfrog-artifactory:
+    type: maven-repository
+    url: "https://entur2.jfrog.io/entur2"
+    username: ${{secrets.ENTUR_ARTIFACTORY_USER}}
+    password: ${{secrets.ENTUR_ARTIFACTORY_PASSWORD}}
 updates:
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "weekly"
-      time: "09:00"
+      time: "11:00"
       timezone: "Europe/Oslo"
-      day: "monday"
+      day: "tuesday"
+    labels:
+      - "workflow"
+      - "dependencies"
   - package-ecosystem: npm
-    directory: "/javascript"
+    directory: "src/examples/javascript"
     schedule:
       interval: "weekly"
+    open-pull-requests-limit: 0
+    labels:
+      - "npm"
+      - "dependencies"
   - package-ecosystem: bundler
-    directory: "/ruby"
+    directory: "src/examples/ruby"
     schedule:
       interval: "weekly"
+    open-pull-requests-limit: 0
+  - package-ecosystem: docker
+    directory: "src/examples/java"
+    schedule:
+      interval: "weekly"
+    labels:
+      - "docker"
+      - "dependencies"
   - package-ecosystem: "gradle"
-    directory: "/java"
+    directory: "src/examples/java"
     registries:
-      - artifactory
+      - jfrog-artifactory
     schedule:
       interval: "daily"
+      time: "11:00"
+      timezone: "Europe/Oslo"
+    target-branch: "dependabot_template"
+    labels:
+      - "java"
+      - "dependencies"
 
-registries:
-  artifactory:
-    type: maven-repository
-    url: "https://entur2.jfrog.io/entur2/libs-release"
-    username: ${{secrets.ENTUR_ARTIFACTORY_USER}}
-    password: ${{secrets.ENTUR_ARTIFACTORY_PASSWORD}}
