@@ -18,7 +18,7 @@ updates:
       - "workflow"
       - "dependencies"
   - package-ecosystem: npm
-    directory: "src/examples/javascript"
+    directory: "javascript"
     schedule:
       interval: "weekly"
     open-pull-requests-limit: 0
@@ -26,12 +26,12 @@ updates:
       - "npm"
       - "dependencies"
   - package-ecosystem: bundler
-    directory: "src/examples/ruby"
+    directory: "ruby"
     schedule:
       interval: "weekly"
     open-pull-requests-limit: 0
   - package-ecosystem: docker
-    directory: "src/examples/java"
+    directory: "java"
     schedule:
       interval: "weekly"
     labels:
