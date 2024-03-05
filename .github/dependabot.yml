@@ -9,6 +9,7 @@ registries:
 updates:
   - package-ecosystem: "github-actions"
     directory: "/"
+    milestone: 1
     schedule:
       interval: "weekly"
       time: "11:00"
@@ -19,6 +20,12 @@ updates:
       - "dependencies"
   - package-ecosystem: npm
     directory: "javascript"
+    milestone: 1
+    groups:
+      non-major:
+        update-types:
+          - "minor"
+          - "patch"
     schedule:
       interval: "weekly"
     open-pull-requests-limit: 0
@@ -27,11 +34,16 @@ updates:
       - "dependencies"
   - package-ecosystem: bundler
     directory: "ruby"
+    milestone: 1
+    ignore:
+      - dependency-name: "business"
+        update-types: [version-update:semver-patch]
     schedule:
       interval: "weekly"
     open-pull-requests-limit: 0
   - package-ecosystem: docker
     directory: "java"
+    milestone: 1
     schedule:
       interval: "weekly"
     labels:
@@ -39,6 +51,7 @@ updates:
       - "dependencies"
   - package-ecosystem: "gradle"
     directory: "src/examples/java"
+    milestone: 1
     registries:
       - jfrog-artifactory
     schedule:
@@ -49,4 +62,3 @@ updates:
     labels:
       - "java"
       - "dependencies"
-
