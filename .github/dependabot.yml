@@ -26,6 +26,6 @@ updates:
 registries:
   artifactory:
     type: maven-repository
-    url: ${{secrets.ARTIFACTORY_URL}}
+    url: "https://entur2.jfrog.io/entur2/libs-release"
     username: ${{secrets.ENTUR_ARTIFACTORY_USER}}
     password: ${{secrets.ENTUR_ARTIFACTORY_PASSWORD}}
