@@ -60,7 +60,6 @@ updates:
       interval: "daily"
       time: "11:00"
       timezone: "Europe/Oslo"
-    target-branch: "dependabot_template"
     labels:
       - "java"
       - "dependencies"
