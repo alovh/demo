@@ -3,9 +3,9 @@ version: 2
 registries:
   jfrog-artifactory:
     type: maven-repository
-    url: "https://entur2.jfrog.io/entur2/libs-snapshot"
-    username: ${{secrets.ARTIFACTORY_USER}}
-    password: ${{secrets.ARTIFACTORY_TOKEN}}
+    url: "https://entur2.jfrog.io/entur2"
+    username: ${{secrets.MY_JFROG_USER}}
+    password: ${{secrets.MY_JFROG_TOKEN}}
 updates:
   - package-ecosystem: "github-actions"
     directory: "/"
