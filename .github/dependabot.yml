@@ -52,7 +52,7 @@ updates:
       - "docker"
       - "dependencies"
   - package-ecosystem: "gradle"
-    directory: "src/examples/java"
+    directory: "java"
     milestone: 1
     registries:
       - jfrog-artifactory
