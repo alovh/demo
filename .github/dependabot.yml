@@ -2,10 +2,9 @@
 version: 2
 registries:
   jfrog-artifactory:
-    type: maven-repository
+    type: npm-registry
     url: "https://entur2.jfrog.io/entur2"
-    username: ${{secrets.ARTIFACTORY_USER}}
-    password: ${{secrets.ARTIFACTORY_AUTH_TOKEN}}
+    token: ${{secrets.ARTIFACTORY_AUTH_TOKEN}}
 updates:
   - package-ecosystem: "github-actions"
     directory: "/"
