@@ -49,7 +49,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
    // Jfrog internal packages just for testing of renovate worker 
-    val enturOauthVersion = "3.9.1"
+    val enturOauthVersion = "3.10.0"
     implementation("org.entur.auth:oauth2-rs-spring-boot-3-web:$enturOauthVersion")
     implementation("org.entur.auth:oidc-auth-client:$enturOauthVersion")
     testImplementation("org.springframework.boot:spring-boot-starter-test") {
